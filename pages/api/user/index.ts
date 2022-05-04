@@ -1,4 +1,3 @@
-import { create } from 'domain';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import db from '../../../db'
 
@@ -8,27 +7,25 @@ export const config = {
   }
 }
 
-type Data = {
-  message: string
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
 
-  if(req.method === 'GET') {
-    const query = 'SELECT * FROM users;';
+  console.log('next handler')
 
-    try {
-      const response = await db.query(query);
-      return res.status(200).json(response.rows);
+  // if(req.method === 'GET') {
+  //   const query = 'SELECT * FROM users;';
 
-    } catch (error) {
-      return res.status(500);
+  //   try {
+  //     const response = await db.query(query);
+  //     return res.status(200).json(response.rows);
+
+  //   } catch (error) {
+  //     return res.status(500);
   
-    }
-  }
+  //   }
+  // }
 
 
 
@@ -56,5 +53,7 @@ export default async function handler(
       });
   
     }
+  } else {
+    return res.status(404).send({})
   }
-}
+} 
