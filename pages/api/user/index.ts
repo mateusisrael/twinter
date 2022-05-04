@@ -1,11 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import db from '../../../db'
 
-export const config = {
-  api: {
-    bodyParse: true
-  }
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,21 +9,18 @@ export default async function handler(
 
   console.log('next handler')
 
-  // if(req.method === 'GET') {
-  //   const query = 'SELECT * FROM users;';
+  if(req.method === 'GET') {
+    const query = 'SELECT * FROM users;';
 
-  //   try {
-  //     const response = await db.query(query);
-  //     return res.status(200).json(response.rows);
+    try {
+      const response = await db.query(query);
+      return res.status(200).json(response.rows);
 
-  //   } catch (error) {
-  //     return res.status(500);
+    } catch (error) {
+      return res.status(500);
   
-  //   }
-  // }
-
-
-
+    }
+  }
 
   if(req.method === 'POST') {
     const { user_name, name, email } = req.body
